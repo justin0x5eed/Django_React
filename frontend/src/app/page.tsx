@@ -1,3 +1,6 @@
+"use client";
+
+
 import {Button, Card, CardBody, CardFooter, CardHeader} from "@heroui/react";
 
 const demoCards = [
