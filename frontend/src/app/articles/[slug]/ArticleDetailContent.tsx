@@ -16,7 +16,7 @@ export default function ArticleDetailContent({article}: ArticleDetailContentProp
         <div>
           <Button
             as={Link}
-            href="/"
+            href="/articles"
             variant="light"
             className="px-0 text-small text-default-500 hover:text-foreground"
           >
@@ -25,9 +25,7 @@ export default function ArticleDetailContent({article}: ArticleDetailContentProp
         </div>
         <Card>
           <CardHeader className="flex flex-col items-start gap-1">
-            <span className="text-tiny uppercase tracking-wide text-default-400">
-              {article.category}
-            </span>
+            <span className="text-tiny uppercase tracking-wide text-default-400">{article.category}</span>
             <h1 className="text-2xl font-semibold text-foreground">{article.title}</h1>
           </CardHeader>
           <CardBody className="space-y-3 text-default-600">
