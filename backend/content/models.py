@@ -29,6 +29,7 @@ class Article(models.Model):
         related_name="articles",
         on_delete=models.CASCADE,
     )
+    title = models.CharField(max_length=255, blank=True)
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
