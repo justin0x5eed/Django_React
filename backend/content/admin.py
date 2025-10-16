@@ -13,6 +13,7 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ("id", "category", "owner", "created_at", "updated_at")
     list_filter = ("category", "created_at", "updated_at")
-    search_fields = ("body", "owner__username", "owner__email")
+    search_fields = ("title", "slug", "content", "owner__username", "owner__email")
     autocomplete_fields = ("category", "owner")
     ordering = ("-created_at",)
+    prepopulated_fields = {"slug": ("title",)}

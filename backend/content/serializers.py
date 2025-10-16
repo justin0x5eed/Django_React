@@ -20,7 +20,8 @@ class ArticleSerializer(serializers.ModelSerializer):
             "category",
             "owner",
             "title",
-            "body",
+            "slug",
+            "content",
             "created_at",
             "updated_at",
         ]
