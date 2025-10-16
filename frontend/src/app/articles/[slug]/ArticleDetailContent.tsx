@@ -3,7 +3,7 @@
 import Link from "next/link";
 import {Button, Card, CardBody, CardHeader} from "@heroui/react";
 
-import {Article} from "../data";
+import {Article} from "../types";
 
 interface ArticleDetailContentProps {
   article: Article;
@@ -25,7 +25,9 @@ export default function ArticleDetailContent({article}: ArticleDetailContentProp
         </div>
         <Card>
           <CardHeader className="flex flex-col items-start gap-1">
-            <span className="text-tiny uppercase tracking-wide text-default-400">{article.category}</span>
+            <span className="text-tiny uppercase tracking-wide text-default-400">
+              {article.category?.name ?? ""}
+            </span>
             <h1 className="text-2xl font-semibold text-foreground">{article.title}</h1>
           </CardHeader>
           <CardBody className="space-y-3 text-default-600">
