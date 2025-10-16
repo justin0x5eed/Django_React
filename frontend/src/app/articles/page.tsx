@@ -1,24 +1,26 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import Link from "next/link";
 import {Button, Card, CardBody, CardFooter, CardHeader} from "@heroui/react";
 
-import {getArticlesEndpoint} from "./api";
+import {getApiBaseUrl, getArticlesEndpoint} from "./api";
 import {Article} from "./types";
 
 export default function ArticleListPage() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const apiBaseUrl = useMemo(() => getApiBaseUrl(), []);
 
   useEffect(() => {
     let isMounted = true;
 
     async function loadArticles() {
+      const endpoint = getArticlesEndpoint();
       try {
         setIsLoading(true);
-        const response = await fetch(getArticlesEndpoint(), {cache: "no-store"});
+        const response = await fetch(endpoint, {cache: "no-store"});
 
         if (!response.ok) {
           throw new Error(`Failed to load articles: ${response.status}`);
@@ -29,7 +31,7 @@ export default function ArticleListPage() {
           setArticles(data);
         }
       } catch (err) {
-        console.error(err);
+        console.error(`Failed to fetch articles from ${endpoint}`, err);
         if (isMounted) {
           setError("无法加载文章列表，请稍后重试。");
         }
@@ -59,7 +61,19 @@ export default function ArticleListPage() {
         </header>
 
         {isLoading && <p className="text-default-500">正在加载文章…</p>}
-        {error && !isLoading && <p className="text-danger">{error}</p>}
+        {error && !isLoading && (
+          <div className="space-y-2 rounded-large border border-danger-200 bg-danger-50 p-4 text-danger-600">
+            <p className="font-semibold">{error}</p>
+            <div className="text-sm">
+              <p className="font-medium">排查步骤：</p>
+              <ol className="mt-1 list-decimal space-y-1 pl-5">
+                <li>确认后端服务已在 {apiBaseUrl} 正常运行（如使用 <code>python manage.py runserver 8006</code>）。</li>
+                <li>若后端端口不同，请在 <code>.env.local</code> 中设置 <code>NEXT_PUBLIC_API_BASE_URL</code> 指向实际地址。</li>
+                <li>打开浏览器开发者工具，查看 Network 面板中 <code>api/articles/</code> 请求的状态码与错误详情。</li>
+              </ol>
+            </div>
+          </div>
+        )}
 
         {!isLoading && !error && (
           <>
