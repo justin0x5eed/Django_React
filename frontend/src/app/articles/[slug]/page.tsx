@@ -1,6 +1,7 @@
 import {notFound} from "next/navigation";
 
-import {articles} from "../data";
+import {getArticlesEndpoint} from "../api";
+import {Article} from "../types";
 import ArticleDetailContent from "./ArticleDetailContent";
 
 interface ArticlePageProps {
@@ -11,11 +12,25 @@ interface ArticlePageProps {
 
 export default async function ArticleDetailPage({params}: ArticlePageProps) {
   const {slug} = await params;
-  const article = articles.find((item) => item.slug === slug);
+  const article = await fetchArticleBySlug(slug);
 
   if (!article) {
     notFound();
   }
 
   return <ArticleDetailContent article={article} />;
+}
+
+async function fetchArticleBySlug(slug: string): Promise<Article | undefined> {
+  const endpoint = new URL(getArticlesEndpoint());
+  endpoint.searchParams.set("slug", slug);
+
+  const response = await fetch(endpoint.toString(), {cache: "no-store"});
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch article: ${response.status}`);
+  }
+
+  const data: Article[] = await response.json();
+  return data.find((item) => item.slug === slug);
 }
