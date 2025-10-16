@@ -1,4 +1,4 @@
-const DEFAULT_API_BASE_URL = "http://localhost:8006";
+const DEFAULT_API_BASE_URL = "http://192.168.50.20:8006";
 
 function normalizeBaseUrl(url: string) {
   return url.endsWith("/") ? url.slice(0, -1) : url;
