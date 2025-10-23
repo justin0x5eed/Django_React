@@ -1,12 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Django + Vite 集成{% endblock %}
 
 {% block head_extra %}
     {% if not debug %}
-        {% for css_file in vite_css %}
-            <link rel="stylesheet" href="{{ css_file }}" />
-        {% endfor %}
+        <link rel="stylesheet" href="{% static 'dist/assets/index.css' %}">
     {% endif %}
 {% endblock %}
 
@@ -24,11 +23,9 @@
 
 {% block body_scripts %}
     {% if debug %}
-        <script type="module" src="{{ vite_dev_server }}/@vite/client"></script>
-        <script type="module" src="{{ vite_dev_server }}/{{ vite_entrypoint }}"></script>
+        <script type="module" src="http://localhost:5173/@vite/client"></script>
+        <script type="module" src="http://localhost:5173/src/main.tsx"></script>
     {% else %}
-        {% if vite_js %}
-            <script type="module" src="{{ vite_js }}"></script>
-        {% endif %}
+        <script type="module" src="{% static 'dist/assets/index.js' %}"></script>
     {% endif %}
 {% endblock %}
