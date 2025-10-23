@@ -1,5 +1,34 @@
 {% extends "base.html" %}
 
+{% block title %}Django + Vite 集成{% endblock %}
+
+{% block head_extra %}
+    {% if not debug %}
+        {% for css_file in vite_css %}
+            <link rel="stylesheet" href="{{ css_file }}" />
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
 {% block content %}
-<p>您好，欢迎来到我们的 Django 主页！</p>
+    <div id="root" class="rounded-3xl bg-base-100 shadow-lg">
+        <div class="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-6 py-12 text-center">
+            <span class="loading loading-spinner loading-lg text-primary" aria-hidden="true"></span>
+            <p class="text-lg font-semibold">正在载入 React 界面…</p>
+            <p class="max-w-xl text-sm text-base-content/70">
+                如果 Tailwind 与 daisyUI 正常工作，你会看到前端应用自动挂载在这里。
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_scripts %}
+    {% if debug %}
+        <script type="module" src="{{ vite_dev_server }}/@vite/client"></script>
+        <script type="module" src="{{ vite_dev_server }}/{{ vite_entrypoint }}"></script>
+    {% else %}
+        {% if vite_js %}
+            <script type="module" src="{{ vite_js }}"></script>
+        {% endif %}
+    {% endif %}
 {% endblock %}

@@ -81,5 +81,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR.parent / "frontend" / "dist"]
+
+VITE_DEV_SERVER = "http://localhost:5173"
+VITE_ENTRYPOINT = "src/main.tsx"
+VITE_MANIFEST_PATH = BASE_DIR.parent / "frontend" / "dist" / "manifest.json"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
