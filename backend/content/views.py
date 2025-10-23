@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework import mixins, viewsets
 
 from .models import Article, ArticleCategory
@@ -16,3 +17,9 @@ class ArticleViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.
 
     queryset = Article.objects.select_related("category", "owner")
     serializer_class = ArticleSerializer
+
+
+def index(request):
+    """Render the simple homepage."""
+
+    return render(request, "index.html")
