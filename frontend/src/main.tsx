@@ -3,31 +3,36 @@ import { createRoot } from 'react-dom/client'
 import type { Root } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import Counter from './components/Counter.tsx'
+import ProgressDemo from './components/ProgressDemo.tsx'
 
-declare global {
-  interface Window {
-    mountReactApp?: (element: HTMLElement) => Root
-  }
-}
-
-const mountApp = (element: HTMLElement) => {
+// 定义一个通用的挂载函数
+const mountApp = (element: HTMLElement, Component: React.FC<any>, props?: any): Root => {
   const root = createRoot(element)
-
   root.render(
     <StrictMode>
-      <App />
-    </StrictMode>,
+      <Component {...props} />
+    </StrictMode>
   )
-
   return root
 }
 
-const djangoRoot = document.getElementById('root')
-
-if (djangoRoot) {
-  mountApp(djangoRoot)
+// 默认：如果存在 #root，就挂载主应用
+const counterRoot = document.getElementById('counter_root')
+if (counterRoot) {
+  mountApp(counterRoot, Counter)
 }
 
+// 暴露到 window 以便 Django 模板或外部脚本动态调用
 if (typeof window !== 'undefined') {
-  window.mountReactApp = (element: HTMLElement) => mountApp(element)
+  (window as any).mountReactApp = (element: HTMLElement, Component: React.FC<any>, props?: any) =>
+    mountApp(element, Component, props)
 }
+
+// 可选：导出组件注册表（方便根据名字查找）
+export const components = {
+  App,
+  Counter,
+  ProgressDemo,
+}
+
