@@ -10,18 +10,6 @@
 {% endblock %}
 
 {% block content %}
-<div class="hero bg-base-200 min-h-screen">
-  <div class="hero-content text-center">
-    <div class="max-w-md">
-      <h1 class="text-5xl font-bold">Hello there</h1>
-      <p class="py-6">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-        quasi. In deleniti eaque aut repudiandae et a id nisi.
-      </p>
-      <button class="btn btn-primary">Get Started</button>
-    </div>
-  </div>
-</div>
     <div id="root" class="rounded-3xl bg-base-100 shadow-lg">
         <div class="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-6 py-12 text-center">
             <span class="loading loading-spinner loading-lg text-primary" aria-hidden="true"></span>
@@ -31,16 +19,9 @@
             </p>
         </div>
     </div>
-    <div class="mt-10 rounded-3xl bg-base-100 p-6 shadow-lg">
-        <h2 class="mb-4 text-xl font-semibold">Django 模板中的 React 计数器</h2>
-        <div id="counter-root">
-            <noscript>需要启用 JavaScript 才能查看计数器。</noscript>
-        </div>
-    </div>
 {% endblock %}
 
 {% block body_scripts %}
-
     {% if debug %}
       <!-- ✅ 开发模式：Vite 热更新 -->
       <script type="module" src="http://192.168.50.20:5173/@vite/client"></script>
