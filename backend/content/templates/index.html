@@ -21,7 +21,7 @@
     </div>
     <div class="mt-10 rounded-3xl bg-base-100 p-6 shadow-lg">
         <h2 class="mb-4 text-xl font-semibold">Django 模板中的 React 计数器</h2>
-        <div id="django-react-counter">
+        <div id="root">
             <noscript>需要启用 JavaScript 才能查看计数器。</noscript>
         </div>
     </div>
@@ -34,8 +34,6 @@
     {% else %}
         <script type="module" src="{% static 'dist/assets/index.js' %}"></script>
     {% endif %}
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script>
         (function () {
             const { useState } = React;
@@ -67,7 +65,7 @@
                 );
             }
 
-            const container = document.getElementById('django-react-counter');
+            const container = document.getElementById('root');
             if (container) {
                 const root = ReactDOM.createRoot(container);
                 root.render(React.createElement(Counter));
