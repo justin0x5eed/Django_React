@@ -1,3 +1,5 @@
+import React from 'react'
+
 const highlights = [
   {
     title: 'Tailwind utilities',
@@ -26,6 +28,8 @@ const roadmap = [
 ]
 
 function App() {
+  const heroHeadingId = React.useId()
+
   return (
     <div className="min-h-screen bg-base-200 text-base-content">
       <header className="bg-base-100 shadow-sm">
@@ -74,7 +78,10 @@ function App() {
                 <span className="loading loading-dots loading-sm text-secondary" aria-hidden />
                 Styling pipeline active
               </div>
-              <h2 className="text-4xl font-black leading-tight md:text-5xl">
+              <h2
+                id={heroHeadingId}
+                className="text-4xl font-black leading-tight md:text-5xl"
+              >
                 Build beautiful interfaces faster with Tailwind and DaisyUI.
               </h2>
               <p className="text-lg text-base-content/70">
@@ -82,7 +89,12 @@ function App() {
                 component library. Mix and match to validate your setup instantly.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4 lg:justify-start">
-                <button className="btn btn-primary btn-wide">View documentation</button>
+                <button
+                  className="btn btn-primary btn-wide"
+                  aria-describedby={heroHeadingId}
+                >
+                  View documentation
+                </button>
                 <button className="btn btn-outline btn-secondary">Switch theme</button>
               </div>
             </div>
