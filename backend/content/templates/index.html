@@ -40,21 +40,16 @@
 {% endblock %}
 
 {% block body_scripts %}
+
     {% if debug %}
-        <script type="module" src="http://192.168.50.20:5173/@vite/client"></script>
-        <script type="module" src="http://192.168.50.20:5173/src/main.tsx"></script>
+      <!-- ✅ 开发模式：Vite 热更新 -->
+      <script type="module" src="http://192.168.50.20:5173/@vite/client"></script>
+      <script type="module" src="http://192.168.50.20:5173/src/main.tsx"></script>
     {% else %}
-        <script type="module" src="{% static 'dist/assets/index.js' %}"></script>
+      <!-- ✅ 生产模式：加载静态打包文件 -->
+      <link rel="stylesheet" href="{% static 'dist/assets/index.css' %}">
+      <script type="module" src="{% static 'dist/assets/index.js' %}"></script>
     {% endif %}
-    <script
-        src="{% if debug %}https://unpkg.com/react@19.1.1/umd/react.development.js{% else %}https://unpkg.com/react@19.1.1/umd/react.production.min.js{% endif %}"
-        crossorigin
-    ></script>
-    <script
-        src="{% if debug %}https://unpkg.com/react-dom@19.1.1/umd/react-dom.development.js{% else %}https://unpkg.com/react-dom@19.1.1/umd/react-dom.production.min.js{% endif %}"
-        crossorigin
-    ></script>
-    <script>
         (function () {
             const { useState } = React;
 
