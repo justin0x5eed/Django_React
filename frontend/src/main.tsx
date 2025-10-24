@@ -17,12 +17,15 @@ const mountApp = (element: HTMLElement, Component: React.FC<any>, props?: any): 
   return root
 }
 
+// 将App挂载到Vite开发服务器首页的vite_root节点
+// 这样使用访问Vite的5173端口也同样可以渲染页面
+// 需要Vite创建的index.html的'root'修改为'vite_root'
 const viteRoot = document.getElementById('vite_root')
 if (viteRoot) {
   mountApp(viteRoot, App)
 }
 
-// 默认：如果存在 #root，就挂载主应用
+// 分别挂载到Django模板的'counter_root'和'progress_root'节点
 const counterRoot = document.getElementById('counter_root')
 if (counterRoot) {
   mountApp(counterRoot, Counter)
