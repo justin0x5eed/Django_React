@@ -4,7 +4,7 @@ import type { Root } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import Counter from './components/Counter.tsx'
-import ProgressDemo from './components/ProgressDemo.tsx'
+import Progress from './components/Progress.tsx'
 
 // 定义一个通用的挂载函数
 const mountApp = (element: HTMLElement, Component: React.FC<any>, props?: any): Root => {
@@ -21,6 +21,10 @@ const mountApp = (element: HTMLElement, Component: React.FC<any>, props?: any): 
 const counterRoot = document.getElementById('counter_root')
 if (counterRoot) {
   mountApp(counterRoot, Counter)
+}
+const progressRoot = document.getElementById('progress_root')
+if (progressRoot) {
+  mountApp(progressRoot, Progress)
 }
 
 // 暴露到 window 以便 Django 模板或外部脚本动态调用

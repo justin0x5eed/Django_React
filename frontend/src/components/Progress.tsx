@@ -11,7 +11,7 @@ function getMoodLabel(progress: number) {
   return moodMapping.find((item) => progress >= item.threshold)?.label ?? moodMapping.at(-1)!.label
 }
 
-export function ProgressDemo() {
+export function Progress() {
   const [progress, setProgress] = useState(60)
   const progressLabelId = useId()
   const sliderLabelId = useId()
@@ -66,4 +66,4 @@ export function ProgressDemo() {
   )
 }
 
-export default ProgressDemo
+export default Progress
