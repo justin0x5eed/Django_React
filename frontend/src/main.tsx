@@ -17,6 +17,11 @@ const mountApp = (element: HTMLElement, Component: React.FC<any>, props?: any): 
   return root
 }
 
+const viteRoot = document.getElementById('vite_root')
+if (viteRoot) {
+  mountApp(viteRoot, App)
+}
+
 // 默认：如果存在 #root，就挂载主应用
 const counterRoot = document.getElementById('counter_root')
 if (counterRoot) {
