@@ -19,6 +19,12 @@
             </p>
         </div>
     </div>
+    <div class="mt-10 rounded-3xl bg-base-100 p-6 shadow-lg">
+        <h2 class="mb-4 text-xl font-semibold">Django 模板中的 React 计数器</h2>
+        <div id="django-react-counter">
+            <noscript>需要启用 JavaScript 才能查看计数器。</noscript>
+        </div>
+    </div>
 {% endblock %}
 
 {% block body_scripts %}
@@ -28,4 +34,44 @@
     {% else %}
         <script type="module" src="{% static 'dist/assets/index.js' %}"></script>
     {% endif %}
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script>
+        (function () {
+            const { useState } = React;
+
+            function Counter() {
+                const [count, setCount] = useState(0);
+
+                return React.createElement(
+                    'div',
+                    { className: 'flex flex-col items-center gap-4' },
+                    React.createElement(
+                        'p',
+                        { className: 'text-lg font-medium' },
+                        `当前计数：${count}`
+                    ),
+                    React.createElement(
+                        'button',
+                        {
+                            type: 'button',
+                            className: 'btn btn-primary',
+                            onClick: function () {
+                                setCount(function (value) {
+                                    return value + 1;
+                                });
+                            },
+                        },
+                        '点击 +1'
+                    )
+                );
+            }
+
+            const container = document.getElementById('django-react-counter');
+            if (container) {
+                const root = ReactDOM.createRoot(container);
+                root.render(React.createElement(Counter));
+            }
+        })();
+    </script>
 {% endblock %}
