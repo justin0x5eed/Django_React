@@ -27,18 +27,6 @@ services:
     depends_on:
       - db
 
-  frontend:
-    image: node:25
-    working_dir: /app
-    volumes:
-      - ./frontend:/app        # 挂载前端目录
-    command: sh -c "npm install && npm run dev"
-    ports:
-      - "5173:5173"
-    environment:
-      - NODE_ENV=development
-    restart: unless-stopped
-
   nginx:
     image: nginx:1.29.1
     restart: always
