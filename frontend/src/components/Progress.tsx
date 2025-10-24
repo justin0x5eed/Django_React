@@ -19,7 +19,7 @@ export function Progress() {
   const moodLabel = useMemo(() => getMoodLabel(progress), [progress])
 
   return (
-    <section className="rounded-3xl bg-base-100 p-10 shadow-2xl">
+    <section className="h-full flex flex-col rounded-3xl bg-base-100 p-10 shadow-2xl">
       <header className="space-y-2 text-center">
         <p className="text-sm uppercase tracking-widest text-secondary">Progress & Mood</p>
         <h2 className="text-2xl font-bold">项目进度演示</h2>
@@ -50,7 +50,7 @@ export function Progress() {
             min="0"
             max="100"
             value={progress}
-            className="range range-primary"
+            className="range range-primary w-full"
             onChange={(event) => setProgress(Number(event.target.value))}
           />
           <div className="flex justify-between text-xs text-base-content/60">
